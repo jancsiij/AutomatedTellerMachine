@@ -156,7 +156,8 @@ namespace AutomatedTellerMachine.Controllers
                 if (result.Succeeded)
                 {
                     var db = new ApplicationDbContext();
-                    var checkingAccount = new CheckingAccount { FirstName = "Finn", LastName = "The Human", AccountNumber = "0000123456", Balance = 0, ApplicationUserId = user.Id };
+                    var accountNumber = (123456 + db.CheckingAccounts.Count()).ToString().PadLeft(10, '0');
+                    var checkingAccount = new CheckingAccount { FirstName = "Finn", LastName = "The Human", AccountNumber = accountNumber, Balance = 0, ApplicationUserId = user.Id };
                     db.CheckingAccounts.Add(checkingAccount);
                     db.SaveChanges();
 
